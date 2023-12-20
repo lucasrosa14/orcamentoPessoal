@@ -25,7 +25,7 @@ colors = ['#008000', '#FF0000', '#66bbbb','#99bb55', '#ee9944', '#444466', '#bb5
 # Criando a janela
 janela = Tk()
 janela.title()
-janela.geometry('900x650')
+janela.geometry('1400x660')
 janela.configure(background=co9)
 janela.resizable(width=FALSE, height=FALSE)
 
@@ -33,24 +33,33 @@ style = ttk.Style(janela)
 style.theme_use("clam")
 
 # Criando frames
-frameCima = Frame(janela, width=1043, height=50, bg=co1, relief="flat")
+frameCima = Frame(janela, width=2000, height=50, bg=co1, relief="flat")
 frameCima.grid(row=0, column=0)
 
-frameMeio = Frame(janela, width=1043, height=361, bg=co1, pady=20, relief="raised")
+frameMeio = Frame(janela, width=1500, height=360, bg=co1, pady=20, relief="raised")
 frameMeio.grid(row=1, column=0, pady=1,padx=0, sticky=NSEW)
 
-frameBaixo = Frame(janela, width=1043, height=300, bg=co1, relief="flat")
-frameBaixo.grid(row=2, column=0, pady=0,padx=10, sticky=NSEW)
+frameBaixo = Frame(janela, width=1500, height=1000, bg=co1, relief="flat")
+frameBaixo.grid(row=2 , column=0, pady=0,padx=10, sticky=NSEW)
 
 frameGrafPizza = Frame(frameMeio, width=580, height=250, bg=co2)
 frameGrafPizza.place(x=415, y=5)
+
+frameTabelaDespesa = Frame(frameBaixo, width=500, height=250, bg=co1, relief="flat")
+frameTabelaDespesa.grid(row=0, column=0)
+
+frameCrud = Frame(frameBaixo, width=250, height=250, bg=co1, relief="flat")
+frameCrud.grid(row=0, column=2, padx=5)
+
+frameConfig = Frame(frameBaixo, width=250, height=250, bg=co1, relief="flat")
+frameConfig.grid(row=0, column=3, padx=5)
 
 # Trabalho no FrameCima
 app_img = Image.open('logo.png')
 app_img = app_img.resize((45,45))
 app_img = ImageTk.PhotoImage(app_img)
 
-app_logo = Label(frameCima, image=app_img, text=" Orçamento Pessoal", width=900, compound=LEFT, padx=5, relief=RAISED, anchor=NW, font=('Verdana 20 bold'), bg=co1, fg=co4)
+app_logo = Label(frameCima, image=app_img, text=" Orçamento Pessoal", width=1500, compound=LEFT, padx=5, relief=RAISED, anchor=NW, font=('Verdana 20 bold'), bg=co1, fg=co4)
 app_logo.place(x=0, y=0)
 
 # Criando barra de progresso de porcentagem de receita
@@ -148,10 +157,77 @@ def graficoPizza():
     canvaCategoria = FigureCanvasTkAgg(figura, frameGrafPizza)
     canvaCategoria.get_tk_widget().grid(row=0, column=0)
 
-
 percent()
-graficoPizza()
 graficoBarra()
 mostraResumo()
+graficoPizza()
+
+# Criando tabelas
+appTabelaDespesa = Label(frameMeio, text="Tabela de Despesas", anchor=NW, font=('Verdana 12'), bg=co1, fg=co4)
+appTabelaDespesa.place(x=5, y=310)
+
+def mostraTabelaDespesa():
+    tabela_head = ['#Id','Categoria','Valor', 'Data Inclusão','Tipo de Pagamento', 'Tipo de Despesa', 'Usuário', 'Observação']
+    lista_itens = [[1,2,3,4,5,6,7,8],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7],[1,2,3,4,5,6,7]]
+    
+    global tree
+
+    tree = ttk.Treeview(frameTabelaDespesa, selectmode="extended",columns=tabela_head, show="headings")
+    vsb = ttk.Scrollbar(frameTabelaDespesa, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(frameTabelaDespesa, orient="horizontal", command=tree.xview)
+
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+
+    tree.grid(column=0, row=0, sticky='nsew')
+    vsb.grid(column=1, row=0, sticky='ns')
+    hsb.grid(column=0, row=1, sticky='ew')
+
+    hd=["center","center","center", "center", "center", "center", "center", "center"]
+    h=[30,100,50,100,120,120,70,120]
+    n=0
+
+    for col in tabela_head:
+        tree.heading(col, text=col.title(), anchor=CENTER)
+        tree.column(col, width=h[n],anchor=hd[n])
+        
+        n+=1
+
+    for item in lista_itens:
+        tree.insert('', 'end', values=item)
+
+appTabela = Label(frameMeio, text="Tabela de Receitas", anchor=NW, font=('Verdana 12'), bg=co1, fg=co4)
+appTabela.place(x=750, y=310)
+
+def mostraTabelaReceita():
+    tabela_head = ['#Id','Categoria','Valor', 'Data Inclusão', 'Usuário', 'Observação']
+    lista_itens = [[1,2,3,4,5,6],[1,2,3,4,5,6]]
+    
+    global tree
+
+    tree = ttk.Treeview(frameTabelaDespesa, selectmode="extended",columns=tabela_head, show="headings")
+    vsb = ttk.Scrollbar(frameTabelaDespesa, orient="vertical", command=tree.yview)
+    hsb = ttk.Scrollbar(frameTabelaDespesa, orient="horizontal", command=tree.xview)
+
+    tree.configure(yscrollcommand=vsb.set, xscrollcommand=hsb.set)
+
+    tree.grid(column=4, row=0, sticky='nsew')
+    vsb.grid(column=5, row=0, sticky='ns')
+    hsb.grid(column=4, row=1, sticky='ew')
+
+    hd=["center","center","center", "center", "center", "center", ]
+    h=[30,100,50,100,70,120]
+    n=0
+
+    for col in tabela_head:
+        tree.heading(col, text=col.title(), anchor=CENTER)
+        tree.column(col, width=h[n],anchor=hd[n])
+        
+        n+=1
+
+    for item in lista_itens:
+        tree.insert('', 'end', values=item)
+
+mostraTabelaDespesa()
+mostraTabelaReceita()
 janela.mainloop()
 
