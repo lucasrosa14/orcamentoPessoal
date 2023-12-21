@@ -235,10 +235,8 @@ mostraTabelaReceita()
 # Inserir Despesa
 lblDescricaoDespesa = Label(frameCrud, text='Nova Despesa', height=1, anchor=NW, font=('Verdana 10 bold'), bg=co1, fg=co4)
 lblDescricaoDespesa.place(x=10, y=10)
-
 lblCategoriaDespesa = Label(frameCrud, text='Categoria', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 lblCategoriaDespesa.place(x=10, y=35)
-
 categoriaDespesa = ['Alimentação','Lazer','Educação','Aluguel','Combustível']
 listaCategoriaDespesa = []
 
@@ -248,29 +246,22 @@ for i in categoriaDespesa:
 comboCategDespesa = ttk.Combobox(frameCrud, width=10, height=1, font=('Ivy 10'))
 comboCategDespesa['values'] = (listaCategoriaDespesa)
 comboCategDespesa.place(x=80, y=35)
-
 lblDataDespesa = Label(frameCrud, text='Data', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 lblDataDespesa.place(x=10, y=60)
-
 calDataDespesa = DateEntry(frameCrud, width=12, background='darkblue', foreground='white', borderwidth=2, year=2023)
 calDataDespesa.place(x=80, y=60)
-
 lblValorDespesa = Label(frameCrud, text='Valor', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 lblValorDespesa.place(x=10, y=85)
-
 inputValorDespesa = Entry(frameCrud, width=14, justify='left', relief='solid')
 inputValorDespesa.place(x=80, y=85)
-
 btnInserirDespesa = Button(frameCrud, text='Inserir'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
 btnInserirDespesa.place(x=10, y=110)
 
 # Inserir Receita
 lblDescricaoReceita = Label(frameCrud, text='Nova Receita', height=1, anchor=NW, font=('Verdana 10 bold'), bg=co1, fg=co4)
 lblDescricaoReceita.place(x=250, y=10)
-
 lblCategoriaReceita = Label(frameCrud, text='Categoria', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
 lblCategoriaReceita.place(x=250, y=35)
-
 categoriaReceita = ['Salário','Outros']
 listacategoriaReceita = []
 
@@ -280,22 +271,34 @@ for i in categoriaReceita:
 comboCategReceita = ttk.Combobox(frameCrud, width=10, height=1, font=('Ivy 10'))
 comboCategReceita['values'] = (listacategoriaReceita)
 comboCategReceita.place(x=320, y=35)
+lblDataReceita = Label(frameCrud, text='Data', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+lblDataReceita.place(x=250, y=60)
+calDataReceita = DateEntry(frameCrud, width=12, background='darkblue', foreground='white', borderwidth=2, year=2023)
+calDataReceita.place(x=320, y=60)
+lblValorReceita = Label(frameCrud, text='Valor', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+lblValorReceita.place(x=250, y=85)
+inputValorReceita = Entry(frameCrud, width=14, justify='left', relief='solid')
+inputValorReceita.place(x=320, y=85)
+btnInserirReceita = Button(frameCrud, text='Inserir'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
+btnInserirReceita.place(x=250, y=110)
+btnInserirReceita = Button(frameCrud, text='Inserir'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
+btnInserirReceita.place(x=250, y=110)
 
-lblDataDespesa = Label(frameCrud, text='Data', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
-lblDataDespesa.place(x=250, y=60)
+# Excluir Despesa
+btnExcluirDespesa = Button(frameMeio, text='Excluir Despesa'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
+btnExcluirDespesa.place(x=180, y=310)
 
-calDataDespesa = DateEntry(frameCrud, width=12, background='darkblue', foreground='white', borderwidth=2, year=2023)
-calDataDespesa.place(x=320, y=60)
+# Excluir Receita
+btnExcluirReceita = Button(frameMeio, text='Excluir Receita'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
+btnExcluirReceita.place(x=915, y=310)
 
-lblValorDespesa = Label(frameCrud, text='Valor', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
-lblValorDespesa.place(x=250, y=85)
-
-inputValorDespesa = Entry(frameCrud, width=14, justify='left', relief='solid')
-inputValorDespesa.place(x=320, y=85)
-
-btnInserirDespesa = Button(frameCrud, text='Inserir'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
-btnInserirDespesa.place(x=250, y=110)
-
+# Incluir categoria de despesa
+lblCategDespesa = Label(frameCrud, text='Categoria', height=1, anchor=NW, font=('Ivy 10 bold'), bg=co1, fg=co4)
+lblCategDespesa.place(x=10, y=180)
+inputCategDespesa = Entry(frameCrud, width=14, justify='left', relief='solid')
+inputCategDespesa.place(x=80, y=180)
+btnInserirCategDespesa = Button(frameCrud, text='Inserir'.upper(),width=19, compound=CENTER, font=('Ivy 10 bold'), bg=co1, fg=co0, overrelief=RIDGE)
+btnInserirCategDespesa.place(x=10, y=205)
 
 janela.mainloop()
 
